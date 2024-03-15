@@ -1,3 +1,12 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, OCaml, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+
 #include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -27,10 +36,65 @@ size_t Size(void* ptr)
 	return ((size_t*)ptr)[-1];
 }
 
+void Merge(int arr[],int l,int m,int r){
+    int i, j, k;
+    int n1 = m - l + 1;
+    int n2 = r - m;
+    int *L = Alloc(n1*sizeof(int));
+    int *R = Alloc(n2*sizeof(int));
+    for (i = 0; i < n1; i++){
+        L[i] = arr[l + i];
+        for (j = 0; j < n2; j++)
+            R[j] = arr[m + 1+ j];
+            i = 0;
+            j = 0;
+            k = l; 
+        while (i < n1 && j < n2)
+        {
+            if (L[i] <= R[j])
+            {
+                arr[k] = L[i];
+                i++;
+            }
+            else
+            {
+                arr[k] = R[j];
+                j++;
+            }
+        k++;
+        }
+    /* Copy the remaining elements of L[], if there
+    are any */
+        while (i < n1)
+        {
+            arr[k] = L[i];
+            i++;
+            k++;
+        }
+    /* Copy the remaining elements of R[], if there
+    are any */
+        while (j < n2)
+        {
+            arr[k] = R[j];
+            j++;
+            k++;
+        }
+        DeAlloc(L);
+        DeAlloc(R);
+    }
+
+}
 // implement merge sort
 // extraMemoryAllocated counts bytes of extra memory allocated
 void mergeSort(int pData[], int l, int r)
 {
+    if(r>l){
+        int mid = (l+r)/2;
+    }
+    int mid = (l+r)/2;
+    mergeSort(pData,l,mid-1);
+    mergeSort(pData,mid+1,r);
+    Merge(pData,l,mid,r);
 }
 
 // parses input file to an integer array
